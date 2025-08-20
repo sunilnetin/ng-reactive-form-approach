@@ -42,9 +42,11 @@ onSubmit(): void {
   }
 
   # form html tag
+  <pre>
   <form class="register-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-
+  </pre>
   # email validation 
+  <pre>
   <div class="row mb-3">
         <label>Email *</label>
         <input
@@ -69,8 +71,9 @@ onSubmit(): void {
           </span>
         </p>
       </div>
-
+  </pre>
 # Submit button enable/disable as form is valid
+<pre>
 <div class="row mb-3">
         <button
           [disabled]="form.invalid"
@@ -80,5 +83,6 @@ onSubmit(): void {
           Register
         </button>
       </div>
+</pre>
 
 
