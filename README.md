@@ -86,3 +86,68 @@ onSubmit(): void {
 </pre>
 
 
+# Bonus points
+#Dynamic Forms with "FormArray"
+//multiple pnone number
+this.form = this.fb.group({
+  phones: this.fb.array([
+    this.fb.control('', Validators.required)
+  ])
+});
+
+//Adding new Control
+
+addPhone() {
+  this.phones.push(this.fb.control('', Validators.required));
+}
+
+get phones(): FormArray {
+  return this.form.get('phones') as FormArray;
+}
+
+//removing control
+removePhone(index: number) {
+  this.phones.removeAt(index);
+}
+
+#Html tag for FormArray
+<code>
+<div formArrayName="phones">
+  <div *ngFor="let phone of phones.controls; let i = index">
+    <input [formControlName]="i" placeholder="Phone number">
+    <button (click)="removePhone(i)">Remove</button>
+  </div>
+  <button (click)="addPhone()">Add Phone</button>
+</div>
+</code>
+
+#Nested "FormGrou"
+this.form = this.fb.group({
+  personal: this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required]
+  }),
+  contact: this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['']
+  })
+});
+
+# Nested FormGroup html template
+
+<code>
+<form [formGroup]="form">
+  <div formGroupName="personal">
+    <input formControlName="firstName" placeholder="First Name">
+    <input formControlName="lastName" placeholder="Last Name">
+  </div>
+
+  <div formGroupName="contact">
+    <input formControlName="email" placeholder="Email">
+    <input formControlName="phone" placeholder="Phone">
+  </div>
+</form>
+</code>
+
+# Use "get()" with type casting for cleaner access:
+const emailControl = (this.form.get('contact.email') as FormControl);
