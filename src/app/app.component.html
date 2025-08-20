@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-12" style="margin:10px">
+    <form class="register-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+        <label>Username </label>
+        <input
+          type="text"
+          formControlName="username"
+          id="uname"
+          class="form-control"
+        />
+
+        <p
+          style="color:red"
+          *ngIf="
+            form?.get('username')?.invalid && form?.get('username')?.touched
+          "
+        >
+          <span *ngIf="form?.get('username')?.errors?.['maxlength']">
+            User name should be maximum 5 charter
+          </span>
+        </p>
+      </div>
+
+      <div class="row mb-3">
+        <label>Email *</label>
+        <input
+          type="email"
+          formControlName="emailFields"
+          id="email"
+          class="form-control"
+          required
+        />
+        <p
+          style="color:red"
+          *ngIf="
+            form?.get('emailFields')?.invalid &&
+            form?.get('emailFields')?.touched
+          "
+        >
+          <span *ngIf="form?.get('emailFields')?.errors?.['email']">
+            Please enter Valid formate
+          </span>
+          <span *ngIf="form?.get('emailFields')?.errors?.['required']">
+            Email Filed is required
+          </span>
+        </p>
+      </div>
+
+      <div class="row mb-3 form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          formControlName="terms"
+          required
+        />
+        <label for="terms" class="form-check-label">
+          I have read and agree to the Terms</label
+        >
+
+        <p
+          style="color:red"
+          *ngIf="form?.get('terms')?.invalid && form?.get('terms')?.touched"
+        >
+          Please Accept the Tearm & condiation
+        </p>
+      </div>
+
+      <div class="row mb-3">
+        <button
+          [disabled]="form.invalid"
+          type="submit"
+          class="btn btn-primary float-end"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
